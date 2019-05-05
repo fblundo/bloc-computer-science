@@ -1,0 +1,89 @@
+1 )Why do programmers use pseudocode?
+They use it in a preliminary stage to translate initial business requirements in functional logic. This allows them to decompose the business request into elementary units,
+to be then translated into source code. This way programmers have the freedom to think before writing the actual code. 
+
+2) If you run pseudocode on your computer what would happen?
+Running pseudocode won't deliver any actual result, but in most cases it would rather return errors. This happens because pseudocode cannot be understood / compiled by
+computers as of today. In the future, leveraging NLP technology, it might be possible!  
+
+***Programming Assignment***
+Write the following algorithms in pseudocode:
+
+A1) Create a function that takes two numbers and prints out the greater number.
+
+function greaterNumber(INPUT number 1, INPUT number 2) {
+
+IF number 1 is greater than number 2
+   PRINT number 1 
+ELSE IF number 2 is greater than number1 
+   PRINT number 2 
+ELSE 
+   PRINT "same number" 
+END IF 
+
+A2) Create a function that prints out the numbers from 1 to 100.
+
+SET i to 1
+WHILE i < 100
+{
+PRINT i 
+INCREASE i by 1 
+}
+
+A3) Create a function that searches for a specific entry in a phonebook.
+
+phoneBook = [{name: "" , number: ""}, {name: "" , number: ""}, ...]
+
+FOR EACH item of phoneBook {
+  search(entry) {
+    IF(entry === name)
+    PRINT name and number 
+    } 
+  }
+}
+
+
+Using the pseudocode you wrote for the previous question, implement it in any computer language of your choice.
+
+A1) Create a function that takes two numbers and prints out the greater number.
+
+function greaterNumber(num1, num2) {
+  if (num1 > num2) {
+     document.write(num1)
+     } 
+  else if (num2 > num1) {
+     document.write (num2)
+     }
+  else {
+     document.write("same number")
+  } 
+}
+
+
+A2) Create a function that prints out the numbers from 1 to 100.
+
+function printNumber() {
+   i = 1;
+   while (i < 100) {
+     document.write(i);
+     i++
+}
+
+
+A3) Create a function that searches for a specific entry in a phonebook.
+
+var phoneBook = [{name: "Fede" , number: "1234"}, {name: "Marco" , number: "5678"}]
+
+
+phoneBook.forEach(search)
+
+function 
+search(object) {
+  
+  if (name === object.name){
+  
+    document.write(object.name + object.number)
+  
+    }
+
+}
