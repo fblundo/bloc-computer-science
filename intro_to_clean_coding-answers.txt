@@ -130,8 +130,10 @@ function checkPerfectSquare(arr){
 7.Given an array of integers, find out whether the array contains any duplicate elements. The function should return true if any value appears at least twice in the array, and false if every element is distinct.
 
 function hasDuplicate(arr){
-      arr = arr.sort();
-      for(var i = 0; i < arr.length; i++){
-          return arr[i+1] === arr[i];
-      }
-  }
+   var arr = arr.sort();
+   for(var i = 0; i < arr.length; i++){
+      if (arr[i] === arr[i+1])
+      return true;
+     }
+   return false;
+ }
