@@ -1,0 +1,61 @@
+//a) Use an array input: ["Vivian", "Ava", "Josh", "Patrick", "Mike"]
+
+var myArray = ["Vivian", "Ava", "Josh", "Patrick", "Mike"]
+
+// b) Insert a new person, "Mary" at the end of the line. In other words, you should insert Mary after Mike.
+
+myArray.push("Mary");
+
+// c) Find a person in line named "Josh." This function should return the position of 2 in the array, (recall that arrays are 0-based).
+
+var findPerson = () => {
+  return myArray.indexOf("Josh");
+}
+
+console.log(findPerson);
+
+// d) Find a person in line named "Emily." What should your function return if it does not find the item in the array?
+
+var findPerson = (name) => {
+  if (myArray.indexOf(name) === -1){return "Person not found!";} else {return index};
+}
+
+console.log("Emily");
+
+//e) What if Ava wants to allow a friend, "Melissa", to cut in line in front of her? How would you code this so Melissa appears before Ava?
+
+var myArray = ["Vivian", "Ava", "Josh", "Patrick", "Mike"]
+
+var skipLine = (skipFriend, friendPosition) => {
+  if (myArray.indexOf(friendPosition) >= 0 ){
+      myArray.splice(myArray.indexOf(friendPosition), 0, skipFriend)
+      return myArray;
+    }
+};
+
+console.log(skipLine("Melissa","Ava"));
+
+//f) If Patrick wants to leave the line, how would you delete him from the array?
+
+var myArray = ["Vivian", "Ava", "Josh", "Patrick", "Mike"]
+
+var remove = (name) => {
+      myArray.splice(myArray.indexOf(name), 1)
+      return myArray;
+    };
+
+console.log(remove("Patrick"));
+
+// 2.	Provide another real-world example that you can model using a data structure.
+
+Another real world-example could be managing an online ecommerce, with a list of purchased items to deliver to customers.
+var ordersDay1 = [item1, item2, item3]
+var ordersDay2 = [item4, item5, item6]
+// 3.	How would your data structure allow developers to access and manipulate the data?
+
+developers could access the array and modify it using array methods such as .push(), .slice(), .pop(), .concat()
+For example:
+
+ordersDay1.push(neworder)
+ordersDay1.pop(lastOrderToRemove)
+var total orders = ordersDay1.concat(ordersDay2)
