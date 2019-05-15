@@ -1,0 +1,80 @@
+Provide all the code and written answers in a file named stacks_and_queues.txt:
+
+a) What is the main difference between a stack and a queue?
+A stack handles requests based on a LIFO approach (last in first out), while a queue uses a FIFO approach (first in first out)
+
+b) What are the similarities between stacks and queues?
+Stacks and queues allow engineers to rank tasks, create an order of operations, and support system functions.
+
+Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word.
+Which data structure would you use for each option and why?
+c) For the UNDO option I would use a stack data structure (to eliminate the last letter when clicking "undo", based on the LIFO
+principle), while for a REDO option I would prefer a queue data structure (to recover the first letter that I had deleted )
+
+
+Programming Questions
+You may program the following question in any language of your choice. Before you begin coding,
+write out a plan as to how you will solve the question.
+
+//Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+
+var letters =[];
+var myWord = 'Bloc!';
+var reverseWord= '';
+
+  	for (var i=0; i<myWord.length; i++){
+  	    letters.push(myWord[i]);
+		}
+		for (var i=0; i<myWord.length; i++){
+  		  reverseWord += letters.pop();
+		}
+
+console.log (reverseWord);
+
+
+//Implement the pop method of a stack using one queue.
+//Make a FIFO data structure mirror the functionality of a LIFO data structure.
+//Since the internal list is not the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
+//To delete an item, take all of the elements in the queue one at a time and put them at the end of the queue,
+//except for the last one which should be removed and returned.
+
+function toq(queue){
+      var newQueue = [];
+      var itemToRemove = [];
+
+      for(var i=0;i<queue.length; i++){
+        if(i==queue.length-1){
+          itemToRemove.push(queue[i]);
+        }else{
+          newQueue.push(queue[i]);
+        }
+      }
+
+    return itemToRemove;
+    }
+console.log(toq('Federico'))
+
+//Implement the enqueue and dequeue methods defined in the checkpoint inside your own Queue class.
+
+class Queue {
+   constructor(){
+     this.elements = []
+   }
+ // enqueue
+  enqueue(element)
+{
+    this.elements.push(element);
+}
+  // dequeue
+  dequeue()
+  {
+    this.elements.shift();
+   }
+}
+var queue = new Queue();
+//test
+queue.enqueue("a")
+queue.enqueue("b")
+console.log(queue)
+queue.dequeue()
+console.log(queue)
