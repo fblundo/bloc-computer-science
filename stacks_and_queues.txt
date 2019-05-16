@@ -8,8 +8,10 @@ Stacks and queues allow engineers to rank tasks, create an order of operations, 
 
 Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word.
 Which data structure would you use for each option and why?
-c) For the UNDO option I would use a stack data structure (to eliminate the last letter when clicking "undo", based on the LIFO
-principle), while for a REDO option I would prefer a queue data structure (to recover the first letter that I had deleted )
+c) To do a redo, we create a stack that keeps all the commands we have undone. So when
+we pop the undo stack to undo the last word, we push the same word we popped into the
+redo stack. We do the same thing in reverse when we redo a command.
+We pop the redo stack and push the popped command back into the undo stack.
 
 
 Programming Questions
