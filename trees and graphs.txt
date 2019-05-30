@@ -1,0 +1,11 @@
+What is a binary tree and what makes it unique to other trees?
+
+What is a heuristic?
+
+What is another problem besides the shortest-path problem that requires the use of heuristics?
+
+What is the difference between a depth-first search and a breadth-first search?
+
+Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+
+What kind of graph is a binary search tree?

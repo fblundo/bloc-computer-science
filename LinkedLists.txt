@@ -22,6 +22,15 @@ You may program the following questions in any language of your choice (JavaScri
 
 Before beginning to code, write out a plan explaining how to solve the question.
 
+You didn't wrote the explanation of the push bug and how you solved it. Also in the functional
+solution test, what is the purpose of you using the newList.createNode(...) method call?
+
+A: The function is wrongly setting the current node to head when head node already exists.
+There can only be one head node in a linked list, the starting element. For this reason,
+if a head node already exists, the current node should be set to the newly created node,
+at the end of the list.
+
+The correct function should read as follows:
 
 FUNCTION push(element)
   CREATE node
@@ -65,20 +74,15 @@ LinkedList.prototype = {
 }
 
 let newList = new LinkedList()
-newList.createNode("head node")
-newList.push("current node")
-newList.push("node 2")
+newList.push("head node")
+newList.push("second node")
+newList.push("third node")
 console.log(newList)
 
 
-Given an unsorted singly linked list, remove all duplicates from the linked list.
-Example
-Input: a -> c -> d -> d -> a
-Output: a -> c -> d
-
 function LinkedList(){
-  this.head= null;
-  this.length=0;
+  this.head = null;
+  this.length = 0;
 }
 
 LinkedList.prototype = {
@@ -100,7 +104,46 @@ LinkedList.prototype = {
       }
       current.next = node;
       this.length += 1;
+    }
+  }
+}
+list= new LinkedList()
+list.push(5);
+list.push(2);
+list.push(4);
+list.push(5);
+list.push(1);
+
+Given an unsorted singly linked list, remove all duplicates from the linked list.
+Example
+Input: a -> c -> d -> d -> a
+Output: a -> c -> d
+
+
+function LinkedList(){
+  this.head = null;
+  this.length = 0;
+}
+
+LinkedList.prototype = {
+  push: function(val){
+    var node = {
+       value: val,
+       next: null
+    }
+
+    if(!this.head){
+      this.head = node;
+      this.length += 1;
       return node;
+    }
+    else{
+      current = this.head;
+      while(current.next){
+        current = current.next;
+      }
+      current.next = node;
+      this.length += 1;
     }
   },
 removeduplicate: function() {
@@ -123,11 +166,14 @@ removeduplicate: function() {
   }
 }
 list= new LinkedList()
-list.push(5);
-list.push(4);
-list.push(2);
-list.push(2);
+list.push("a");
+list.push("c");
+list.push("d");
+list.push("d");
+list.push("a");
 list.removeduplicate()
+console.log(list);
+
 
 Given an unsorted singly linked list, reverse it.
 Example
@@ -135,13 +181,13 @@ Input: a -> b -> c -> d
 Output: d -> c -> b -> a
 
 let list = {
-  value: "A",
+  value: "a",
   next: {
-    value: "B",
+    value: "b",
     next: {
-      value: "C",
+      value: "c",
       next: {
-        value: "D",
+        value: "d",
         next: null
       }
     }
@@ -153,11 +199,17 @@ function reverseList(list) {
   let previous = null
 
   while(node != null) {
+    // set nodeNext to selext the first node in the list
     let nodeNext = node.next
+    // set node.next to be null, since previous = null
     node.next = previous
+    // set previous to be node (while node.next remains null)
     previous = node
+    //set note to be the next nodeNext to be processed in the loop
     node = nodeNext
   }
+  //return previous as the new node
+  //as the loop continues, all nodes are reversed
   return previous
 }
 console.log(reverseList(list))
