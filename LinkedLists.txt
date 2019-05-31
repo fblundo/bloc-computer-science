@@ -181,14 +181,17 @@ Input: a -> b -> c -> d
 Output: d -> c -> b -> a
 
 let list = {
-  value: "a",
+  value: "1",
   next: {
-    value: "b",
+    value: "2",
     next: {
-      value: "c",
+      value: "3",
       next: {
-        value: "d",
-        next: null
+        value: "4",
+        next: {
+          value: "5",
+          next: null
+        }
       }
     }
   }
