@@ -1,0 +1,171 @@
+1 What is a hash table?
+A hash table is a data structure that is used to store keys/value pairs.
+
+2 What is hashing?
+In hashing, large keys are converted into small keys by using hash functions. By using a good hash function, hashing can work well.
+
+3 How does a hash table store data?
+It uses a hash function to compute an index into an array in which an element will be inserted or searched.
+
+4 How are hash tables and objects different?
+ Hash tables and objects are similar but the difference is that an object is a standalone entity, with properties and type.
+ Hash table is a data structure that can map keys to values, and uses a hash function to compute an index into an array
+ of buckets, from which the desired value can be retrieved.
+
+5 Determine whether you would use a hash table or an object to store each of the following pieces of data:
+  A list of pets and their unique names: hashtable
+  The name, age, and the birthday of your best friend: object
+  The name and location of every company in a given city: hashtable
+  All of the books checked out from a library by a particular individual: hashtable
+  The primary and secondary phone numbers for a contact: objects
+
+  //1 Create a hash table that allows a sales associate to enter a customer's name,
+  //address, and phone number into the system and look up
+  //customers using their phone numbers.
+
+  function hash(key, size) {
+    var hash = 0;
+    for(var i = 0; i < key.length; i++){
+      hash += key.charCodeAt(i);
+    }
+    return hash % size;
+  };
+
+  function hashTable (){
+    var container = [];
+    var containerCap = 777;
+
+    this.set = function(phone, name, customerAddress){
+      var index = hash(phone, containerCap);
+
+      if (container[index] === undefined) {
+        container[index] = [ [phone, name, customerAddress] ];
+      }
+  };
+
+    this.get = function(phone){
+      var index = hash(phone, containerCap);
+
+      if(container[index] === undefined){
+        return "The list of customers is empty";
+      } else {
+        for(var i = 0; i < container[index].length; i++) {
+          if(container[index][i][0] === phone) {
+            return container[index][i][0] + ", " + container[index][i][1] + ", " + container[index][i][2];
+          } else {
+            return "Customer does not exist";
+          }
+        }
+      }
+    };
+  }
+
+  var customers = new hashTable();
+  customers.set("999-999-9999", "Alex", "123 Random St");
+  customers.set("333-333-3333", "Todd", "789 Nowhere Dr");
+  customers.set("222-222-2222", "Sam", "456 Some Ln");
+  customers.set("555-555-5555", "Josh", "012 Circle Ct");
+
+  console.log(customers.get("999-999-9999"));
+  console.log(customers.get("222-222-2222"));
+  console.log(customers.get("333-333-3333"));
+  console.log(customers.get("555-555-5555"));
+
+
+  //Create a hash table that allows a store owner to track
+  //their store's inventory and quantity.
+
+  function hash(key, size) {
+    var hash = 0;
+    for(var i = 0; i < key.length; i++){
+      hash += key.charCodeAt(i);
+    }
+    return hash % size;
+  };
+
+  function hashTable (){
+    var container = [];
+    var containerCap = 777;
+
+    this.set = function(item, quantity){
+      var index = hash(item, containerCap);
+
+      if (container[index] === undefined) {
+        container[index] = [ [item, quantity] ];
+      }
+  };
+
+  this.get = function(item){
+    var index = hash(item, containerCap);
+
+    if(container[index] === undefined){
+      return "The inventory is empty";
+    } else {
+      for(var i = 0; i < container[index].length; i++) {
+        if(container[index][i][0] === item) {
+          return container[index][i][0] + ", " + container[index][i][1];
+        } else {
+          return "This item does not exist";
+        }
+      }
+    }
+  };
+}
+
+var inventoryItems = new hashTable();
+inventoryItems.set("Shoes", "100");
+inventoryItems.set("Socks", "200");
+inventoryItems.set("Hats", "40");
+
+inventoryItems.get("Socks")
+
+
+//Create a hash table that allows digital copies of newspapers
+//to be entered and searched by publisher and publication date.
+
+  function hash(key, size) {
+    var hash = 0;
+    for(var i = 0; i < key.length; i++){
+      hash += key.charCodeAt(i);
+    }
+    return hash % size;
+  };
+
+
+  function hashTable (){
+    var container = [];
+    var containerCap = 777;
+
+    this.set = function(copy, publisher, pubDate){
+      var key = publisher + pubDate;
+      var index = hash(key, containerCap);
+
+      if (container[index] === undefined) {
+        container[index] = [[copy, publisher, pubDate]];
+     }
+  };
+
+  this.get = function(publisher, pubDate){
+    var key = publisher + pubDate;
+    var index = hash(key, containerCap);
+
+  if(container[index] === undefined){
+    return "The list of copies is empty";
+    } else {
+    for(var i = 0; i < container[index].length; i++) {
+      if(container[index][i][1] === publisher && container[index][i][2] === pubDate ) {
+          return container[index][i][0] + ", " + container[index][i][1] + ", " + container[index][i][2];
+          } else {
+            return "The copy does not exist";
+          }
+        }
+      }
+    };
+  }
+
+var copy = new hashTable();
+copy.set("The New Deal", "Andrea", "1991");
+copy.set("Savings", "Morra", "1993");
+copy.set("The record", "Sallustio", "1971");
+
+copy.get("Morra", "1993");
