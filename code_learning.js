@@ -1,34 +1,3 @@
-What is a binary tree and what makes it unique to other trees?
-n computer science, a binary tree is a tree data structure in
-which each node has at most two children, which are referred
-to as the left child and the right child.
-
-What is a heuristic?
-is any approach to problem solving or self-discovery that employs a practical method,
-not guaranteed to be optimal, but instead sufficient for reaching an immediate goal.
-
-What is another problem besides the shortest-path problem that requires the use of heuristics?
-Other examples of problem could be displaying a set of similar images, the result of a
-Google search query or the intent analysis work performed by a AI-chatbot
-
-What is the difference between a depth-first search and a breadth-first search?
-A depth-first search operates vertically, analyzing data by vertical clusters,
-moving to the next cluster of data only after having completed a complete analysis
-of the first cluster; a breadth-first search is a less "specialized" search,
-running across multiple data clusters.
-
-Explain in your own words what an undirected, a-cyclic, unweighted graph is.
-This particular data structure should be bi-directional, linear, without giving
-a different top-down attribute of importance (weight) to one node or the other.
-
-What kind of graph is a binary search tree?
-Binary search trees keep their keys in sorted order, so that lookup and
-other operations can use the principle of binary search: when looking for
-a key in a tree (or a place to insert a new key), they traverse the tree
-from root to leaf, making comparisons to keys stored in the nodes of the
-tree and deciding, on the basis of the comparison, to continue searching
-in the left or right subtrees.
-
 For the following questions, describe in words how you could solve the problem and then do so. Use the depiction of the Binary Search Tree to refer to the examples.
 
 1. Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
@@ -116,10 +85,8 @@ console.log(BST.search(BST.root, 49)) // "Value 49 does not exist in this tree."
 Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
 
 a) First, I would create a function "insert" to create my tree from scratch
-b) Second, I would create a function called "searchBool" to move through the tree
-c) Then, I would create a function called "distancefromRoot" to compute the distance between one node and the root
-d) Then, I would create a function called "distance" to compute the total distance between 2 nodes
-e) Depending on where the 2 nodes are located, I would compute th distance accordingly (LCA = root, nodes are both on the right or left side of the tree, ...)
+b) Second, I would create a function called "searchBool"
+
 
 that takes in 2 arguments, the starting node to search through (in this case the root), and the data or number to search for.
 c) I would then check whether the node exists, if it doesn't, return 'this value doesn't exist in the tree.'
