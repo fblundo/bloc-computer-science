@@ -1,0 +1,67 @@
+1) What is time complexity and what is its relation to algorithms?
+Time complexity is the computational complexity that describes the amount of time it takes to run an algorithm.
+Time complexity is commonly estimated by counting the number of elementary operations performed by the algorithm.
+
+2) What is runtime?
+Runtime is the performance of an algorithm. Performance of an algorithm is usually represented by the Big O Notation.
+
+3) How is the runtime of an algorithm calculated?
+It depends on the size of the input and the number of operations required for each input item.
+
+4) Name the six types of algorithm growth rates we saw in this checkpoint and list them in order of most efficient to least efficient. Now Google another algorithmic growth rate not covered and place it in the correct spot in your list.
+- O(1)
+- O(log n)
+- O(n)
+- O(n log n)
+- O(n^2)
+- O(2^n)
+
+5) Choose one of the algorithmic growth rates from the last question and make a comparison to a real-life situation.
+- O(n): a hostess who needs to check if the attendee is in the guestlist or not. The more attendees will be in the guestlist, the longer it will be.
+- O(1): a speaker announcing the trains arriving and leaving a train station
+
+6) Determine the time complexity of the following snippet of code. It is commonly known as a linear search.
+
+FUNCTION linearSearch(array, target)
+ FOR each number in the array
+   IF number = target THEN
+     RETURN true
+   END IF
+ END FOR
+ RETURN false
+END FUNCTION
+
+- There is only one for loop, so:
+Time complexity = O(n) -> linear growth rate
+
+Determine the time complexity of the following snippet of code.
+If you get stuck, read through the graphical representation section again.
+
+FUNCTION foo(array)
+ FOR each number in the array
+   FOR each number in the array
+     print "Hello"
+   END FOR
+ END FOR
+END FUNCTION
+
+- There is a nested for loop, so:
+Time complexity = 0(n^2) -> quadratic growth rate
+
+FUNCTION fibonacci(number)
+ IF number < 1 THEN
+   ERROR
+ ELSE IF number = 1 or 2 THEN
+   RETURN 1
+ ELSE
+   CALL fibonacci WITH number - 2 RETURNING twoBack
+   CALL fibonacci WITH number - 1 RETURNING oneBack
+   RETURN twoBack + oneBack
+ END IF
+END FUNCTION
+
+- The function contains a recursive function, so:
+Time complexity = 0(2^n) -> exponential growth rate
+
+Out of the code snippets you just saw, which is the most time efficient?
+- The most time efficient is the linear one O(n)
