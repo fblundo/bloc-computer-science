@@ -243,9 +243,10 @@ BST.insert(8);
 BST.insert(20);
 BST.insert(41);
 
-console.log(BST.distance(BST.root, 8, 41)) //"Total distance between nodes: 6"
-console.log(BST.distance(BST.root, 15, 36)) //"Total distance between nodes: 2"
+
 console.log(BST.distance(BST.root, BST.root, BST.root))//"Total distance between nodes: 0"
 console.log(BST.distance(BST.root,BST.root, 25 )) //"Total distance between nodes: 1"
 console.log(BST.distance(BST.root, 36,BST.root )) //"Total distance between nodes: 2"
 console.log(BST.distance(BST.root, 8, BST.root )) //"Total distance between nodes: 3"
+console.log(BST.distance(BST.root, 8, 41)) //"Total distance between nodes: 6"
+console.log(BST.distance(BST.root, 15, 36)) //"Total distance between nodes: 2"

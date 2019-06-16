@@ -1,0 +1,32 @@
+Provide all code and written answers in a file named algorithms_introduction_answers.txt:
+Using proper pseudo-code, describe the following primitive algorithms:
+- Making coffee;
+- Washing dishes;
+- A choice of your own.
+As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
+Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+1) Making Coffee
+- Select coffee flavour
+- Insert coffee capsule in the machine
+- Position coffee cup
+- Click on "start" button
+- Click on "stop" button
+- Take the coffee cup
+
+2) Washing dishes
+- Take dirty dish
+- Put soap on dirty dish
+- Open sink water
+- Clean the dish under the water and remove the dirt
+- Check the dish is clean
+- Close sink water
+- Hung up the dish
+
+3) Open a safe
+- Write the secret combination to open the safe
+- Click on "OK"
+- If the code returns as "valid", turn the security key
+- Open the safe
+
+An efficient algorithm takes less time and less power / resources / memory / CPU to reach a determined goal vs a less efficient algorithm.
