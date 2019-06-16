@@ -6,27 +6,63 @@ Using proper pseudo-code, describe the following primitive algorithms:
 As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
 Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
 
+
+
+
 1) Making Coffee
-- Select coffee flavour
-- Insert coffee capsule in the machine
-- Position coffee cup
-- Click on "start" button
-- Click on "stop" button
-- Take the coffee cup
+
+IF coffeeMaker water level equals null
+ THEN add water;
+ ELSE IF water level is less than half;
+   INCREMENT by one cup for each cup of coffee needed
+ ELSE do nothing;
+END IF
+
+IF cream is required
+  THEN add two tablespoons
+  ELSE don't add cream;
+END IF
 
 2) Washing dishes
-- Take dirty dish
-- Put soap on dirty dish
-- Open sink water
-- Clean the dish under the water and remove the dirt
-- Check the dish is clean
-- Close sink water
-- Hung up the dish
+
+IF dish equals dirty dish with oil
+   THEN
+   use brush and special soap to remove oil;
+   use water to clean remaining dirt;
+   ELSE
+   use normal soap and water to clean dirt;
+END IF
+
+IF dish equals wet dish
+  THEN
+  hung up the dish
+  ELSE
+  put the dish in the kitchen cubpoard
+END IF
 
 3) Open a safe
-- Write the secret combination to open the safe
-- Click on "OK"
-- If the code returns as "valid", turn the security key
-- Open the safe
 
-An efficient algorithm takes less time and less power / resources / memory / CPU to reach a determined goal vs a less efficient algorithm.
+IF safe is locked
+   THEN
+      insert combination
+      click ok
+      IF combination is correct
+        open the safe
+      ELSE IF
+        check if the combination has been changed by someone else in the family
+      END IF
+   ELSE
+      check who has opened it
+      IF nobody answers
+         THEN call the police
+      ELSE
+         take what you need
+         close it using the safe code
+END IF
+
+2) Name 3 companies who created an algorithm that made them successful
+- The online dating site eHarmony has closely guarded its matchmaking algorithm
+- The Facebook algorithm is a process that ranks all available posts that can display on a user's News Feed based on how likely that user will have a positive reaction.
+- Uber's platform driver <> passenger matching algorithm
+
+3) An efficient algorithm takes less time and less power / resources / memory / CPU to reach a determined goal vs a less efficient algorithm.
