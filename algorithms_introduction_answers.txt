@@ -6,9 +6,6 @@ Using proper pseudo-code, describe the following primitive algorithms:
 As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
 Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
 
-
-
-
 1) Making Coffee
 
 IF coffeeMaker water level equals null
@@ -25,20 +22,23 @@ END IF
 
 2) Washing dishes
 
-IF dish equals dirty dish with oil
-   THEN
-   use brush and special soap to remove oil;
-   use water to clean remaining dirt;
-   ELSE
-   use normal soap and water to clean dirt;
-END IF
+WHILE (dish dirty)
+  IF dish equals dirty dish with oil
+     THEN
+     use brush and special soap to remove oil;
+     use water to clean remaining dirt;
+     ELSE
+     use normal soap and water to clean dirt;
+  END IF
+END WHILE
 
-IF dish equals wet dish
-  THEN
-  hung up the dish
-  ELSE
-  put the dish in the kitchen cubpoard
-END IF
+FOR dish
+  IF (dish equal wet dish)
+    hung up the dish
+    ELSE
+    put the dish in the kitchen cubpoard
+  END IF
+END FOR
 
 3) Open a safe
 
