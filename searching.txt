@@ -1,0 +1,65 @@
+Short Answer
+
+1) What is a real-life scenario that uses linear search?
+When you are looking for a brand of cereals at the supermarket, you go through the shelf, searching through all the different boxes,
+as if it was an arrayay
+
+2) What is a real-life scenario that uses binary search?
+When you are searching a specific artist in a sorted list on Spotify, or when you search a file in a sorted list of files
+
+3) Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using linear search?
+7 iterations
+
+4) Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using binary search?
+3 iterations
+
+5) Given an unsorted collection of a million items, which algorithm would you choose between linear search and binary search? Explain your reasoning.
+I would go for a linear search algorithm
+
+6) Given a sorted collection of a million items, which algorithm would you choose between linear search and binary search? Explain your reasoning.
+I would go for a binary search algorithm
+
+Programming Assignment:
+- You and a friend have set a wager to see who can find the word "Albatross"
+in the dictionary the fastest. Write a program to allow you to win the bet.
+
+var names = ["Albatross", "Dog", "Monkey"; "Zebra"];
+
+function WordFinder(array, word){
+  var low = array[0];
+  var high = array[array.length -1];
+
+  while (low <= high) {
+    var mid = (array.indexOf(low) + array.indexOf(high)) / 2;
+    mid = Math.round(mid);
+
+    if(array[mid] > word) {
+      high = array[mid -1];
+    }
+    else if (array[mid] < word) {
+      low = array[mid + 1];
+    }
+    else {
+      return array[mid];
+    }
+  }
+  return "The name is not in the list";
+}
+
+console.log(WordFinder(names, "Albatross"));
+
+- You work at a pet store, and a child has asked you to net the only white-spotted
+goldfish from the fish tank. Write a program that will help you net the right fish.
+
+var fishTank = ["goldfish", "whitespottedgoldfish", "whitefish", "bluefish"];
+
+function CatchFish(arr, target){
+  for(var i = 0; i < arr.length; i++){
+    if (arr[i] === target){
+      return "You've net the only white-spotted goldfish from the fish tank";
+    }
+  }
+  return "The only white-spotted goldfish isn't in the tank .";
+}
+
+console.log(CatchFish(fishTank, "whitespottedgoldfish"));
