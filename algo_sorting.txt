@@ -1,0 +1,65 @@
+1) Implement a solution for bubble sort.
+
+FUNCTION bubbleSort(collection)
+   REPEAT UNTIL swapped is FALSE
+     SET swapped to false
+     FOR i = FIRST ITEM of collection to LAST ITEM of collection - 1
+       IF collection[i] > collection[i + 1] THEN
+         SET tmp to collection[i]
+         SET collection[i] to collection[i + 1]
+         SET collection[i + 1] to tmp
+         SET swapped to true
+       END IF
+     END FOR
+  END REPEAT
+
+   RETURN collection
+ END FUNCTION
+
+2) Write pseudocode for quicksort.
+
+FUNCTION quickSort(collection)
+    IF collection length <=1
+        RETURN collection
+    ELSE
+        SET left, right to empty arrays
+        SET pivot to last item in collection
+        SET length to length of collection
+
+        FOR i = 0 to length -1
+            IF collection[i] <= pivot
+                PUSH collection[i] to last index of left
+            ELSE
+                PUSH collection[i] to last index of right
+            END IF
+        END FOR
+        RETURN quickSort(left).concat(pivot, quickSort(right));
+    END IF
+END FUNCTION
+
+3) We talked about time complexity in a previous checkpoint,
+and how to get an idea of the efficiency of an algorithm.
+After looking at the pseudocode for the above sorting methods,
+identify why merge sort and quick sort are much more efficient
+than the others. Walking through each algorithm with a few sample collections may help.
+
+QUICK SORT: 0(n log n)
+MERGE SORT: 0(n log n)
+BUBBLE SORT - 0(n^2)
+SELECTION SORT - 0(n^2)
+-Quick Sort loops through the full array only once and use divide
+and conquer to sort through the remaining data. Time complexity gets smaller
+for each recursive call.
+-Merge sort uses similar divide and conquer process. The algorithm doesn't need
+to iterate through the whole collection multiple times because items are sorted
+in smaller groupings before sorted in the entire collection.
+
+4) All of the sorts addressed in this checkpoint are known
+as comparison sorts. Research bucket sort and explain how
+it works. What is the ideal input for bucket sort?
+
+Bucket sort  is a sorting algorithm that works by distributing the
+elements of an array into a number of buckets. Each bucket is then
+sorted individually, either using a different sorting algorithm,
+or by recursively applying the bucket sorting algorithm.
+The ideal input is uniformly distributed over a range. 
