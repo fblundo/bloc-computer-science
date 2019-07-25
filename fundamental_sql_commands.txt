@@ -1,0 +1,165 @@
+Use the commands above to complete the following tasks, and submit the SQL statements.
+Real-world examples must be distinct from those used in the text.
+
+2) List the commands for adding, updating, and deleting data.
+Adding: INSERT INTO todolist (task, time) VALUES (task_1, 10:00), (task_2, 20:00);
+Updating: UPDATE todolist SET time= 15:00 WHERE task="task_1"
+Deleting: DELETE FROM todolist WHERE task="task_1"
+
+3) Explain the structure for each type of command.
+Adding: the INSERT INTO statement takes the specified VALUES and place them below the respective column (task, time)
+Updating: the UPDATE statement takes all the task which correspond to "task_1" in the todolist table and SET the time to 15:00
+Deleting: the DELETE FROM statement takes the todolist and removes all tasks named "task_1"
+
+
+4) What are some of the data types that can be used in tables?
+DATE	Stores date in the format YYYY-MM-DD
+TIME	Stores time in the format HH:MI:SS
+DATETIME	Stores date and time information in the format YYYY-MM-DD HH:MI:SS
+TIMESTAMP	Stores number of seconds passed since the Unix epoch
+YEAR	Stores year in 2 digit or 4 digit format. Range 1901 to 2155 in 4-digit format. Range 70 to 69, representing 1970 to 2069
+CHAR	Fixed length with maximum length of 8,000 characters
+VARCHAR	Variable length storage with maximum length of 8,000 characters
+TEXT	Variable length storage with maximum size of 2GB data
+
+Give a real-world example of each type.
+DATE 2012-02-11
+TIME 20:29:00
+DATETIME --> 2012-02-11 20:29:00
+TIMESTAMP --> 2019-03-01 00:50:00
+YEAR - 1901
+CHAR --> "text_trial"
+VARCHAR --> "text_trial"
+TEXT --> "text_trial"
+
+5) Decide how to create a new table to hold a list of people invited to a wedding dinner.
+The table needs to have first and last names, whether they sent in their RSVP, the number of guests
+they are bringing, and the number of meals (1 for adults and 1/2 for children).
+
+Which data type would you use to store each of the following pieces of information?
+First and last name --> text
+Whether they sent in their RSVP --> numeric (1,0)
+Number of guests --> numeric (5)
+Number of meals --> numeric (1,1)
+Write a command that creates the table to track the wedding dinner.
+
+CREATE TABLE wedding_list (
+    id integer,
+    participant_first_name text,
+    participant_last_name text,
+    rsvp numeric (1, 0), // yes = 1 or no = 0
+    meals_number numeric (2,1) // possible to have 1 or 0,5 meal
+    );
+
+Write a command that adds a column to track whether the guest sent a thank you card.
+
+ALTER TABLE wedding_list ADD COLUMN thankyou_sent;
+
+You have decided to move the data about the meals to another table, so write a command
+to remove the column storing the number meals from the wedding table.
+
+ALTER TABLE wedding_list DROP COLUMN meals_number,
+
+The guests will need a place to sit at the reception, so write a command that adds a column for table number.
+
+ALTER TABLE wedding_list ADD COLUMN table_number;
+
+The wedding is over and we do not need to keep this information, so write a command that
+deletes the table numbers from the database.
+
+DROP TABLE wedding_list;
+
+7) Write a command to create a new table to hold
+the books in a library with the columns ISBN, title, author, genre, publishing date, number
+of copies, and available copies.
+
+CREATE TABLE library (
+    isbn text,
+    title text,
+    author text,
+    genre text,
+    pub_date date,
+    n_copies numeric,
+    av_copies numeric
+
+);
+
+7.1) Find three books and add their information to the table.
+
+INSERT INTO library (isbn, title, author, genre, pub_date, n_copies, av_copies)
+VALUES
+(978343161484100, Big blue, Eddy Mol, thriller, 10-10-2019, 200, 11),
+(783432361484100, Big red, Fred Lol, fantasy, 02-10-2018, 300, 22),
+(345834161484122, Big yellow, Seil Mong, romance, 02-10-2000, 400, 44) ;
+
+7.2) Someone has just checked out one of the books. Change the number of available copies to 1 fewer.
+
+UPDATE library SET av_copies=10 WHERE isbn = 978343161484100;
+
+7.3) Now one of the books has been added to the banned books list. Remove it from the table.
+
+DELETE FROM library WHERE isbn = 783432361484100;
+
+8) Write a command to make a new table to hold spacecrafts. Information should include id,
+name, year launched, country of origin, a brief description of the mission, orbiting body,
+if it is currently operating, and its approximate miles from Earth.
+
+CREATE TABLE spacecrafts (
+  id integer,
+  name text,
+  year date,
+  country text,
+  mission text,
+  orbit_body text,
+  actively_oper numeric (1),
+  earths_miles text
+);
+
+In addition to the table creation, provide commands that perform the following operations:
+Add three non-Earth-orbiting satellites to the table.
+
+INSERT INTO spacecrafts (id, name, year, country, mission, orbit_body, actively_oper, earths_miles)
+VALUES
+(1, Sputnik, 1990, Russia, Moon, 292830Y0, 1, 100000),
+(2, Sputen, 2000, Russia, Moon, 292840Y0, 0, 0),
+(3, Spik, 1999, USA, Moon, 192830Y0, 1, 30000);
+
+Remove one of the satellites from the table since it has just crashed into the planet.
+Edit another satellite because it is no longer operating and change the value to reflect that.
+
+DELETE FROM spacecrafts WHERE id=1
+
+UPDATE spacecrafts SET actively_oper=1 WHERE id=2;
+
+9) Write a command to create a new table to hold the emails in your inbox.
+This table should include an id, the subject line, the sender, any additional recipients,
+the body of the email, the timestamp, whether or not you have read the email, and the id
+of the email chain it's in. Also provide commands that perform the following operations:
+
+CREATE TABLE inbox (
+  id integer,
+  subject_line text,
+  sender text,
+  add_recip text,
+  email_body text,
+  timestamp timestamp,
+  email_read integer,
+  email_chain integer
+);
+
+9.1) Add three new emails to the inbox.
+
+INSERT INTO inbox (id, subject_line, sender, add_Recip, email_body, timestamp, email_read, email_chain)
+VALUES
+(1, Hi, ted@box.com, mad@box.com, hello big opportunity for you, 2019-03-01 00:50:00, 1, 10),
+(2, Howdy, med@box.com, sad@box.com, hello quick opportunity for you, 2019-02-01 00:10:00, 1, 9),
+(3, Salut, led@box.com, fat@box.com, hello exciting opportunity for you, 2019-01-01 00:30:00, 0, 11);
+
+9.2) You deleted one of the emails, so write a command to remove the row from the inbox table.
+
+DELETE FROM inbox WHERE id=1;
+
+9.3) You started reading an email but just heard a crash in another room.
+Mark the email as unread before investigating the crash, so you can come back and read it later.
+
+UPDATE inbox SET email_read=0 WHERE id=2;
