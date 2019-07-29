@@ -85,8 +85,10 @@ console.log(BST.search(BST.root, 49)) // "Value 49 does not exist in this tree."
 Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
 
 a) First, I would create a function "insert" to create my tree from scratch
-b) Second, I would create a function called "searchBool"
-
+b) Second, I would create a function called "searchBool" to move through the tree
+c) Then, I would create a function called "distancefromRoot" to compute the distance between one node and the root
+d) Then, I would create a function called "distance" to compute the total distance between 2 nodes
+e) Depending on where the 2 nodes are located, I would compute th distance accordingly (LCA = root, nodes are both on the right or left side of the tree, ...)
 
 that takes in 2 arguments, the starting node to search through (in this case the root), and the data or number to search for.
 c) I would then check whether the node exists, if it doesn't, return 'this value doesn't exist in the tree.'
@@ -216,3 +218,5 @@ console.log(BST.distance(BST.root, BST.root, BST.root))//"Total distance between
 console.log(BST.distance(BST.root,BST.root, 25 )) //"Total distance between nodes: 1"
 console.log(BST.distance(BST.root, 36,BST.root )) //"Total distance between nodes: 2"
 console.log(BST.distance(BST.root, 8, BST.root )) //"Total distance between nodes: 3"
+
+>> ALGORITHMS INTRODUCTION
