@@ -1,0 +1,172 @@
+1) How do you find related data held in two separate data tables?
+
+I can run a query using JOIN to merge the 2 data tables based on a common id.
+
+1.1) Explain, in your own words, the difference between an INNER JOIN,
+LEFT OUTER JOIN, and RIGHT OUTER JOIN. Give a real-world example for each.
+
+LEFT OUTER JOIN:  given table1 and table2, the LEFT OUTER JOIN will take all rows in table1 and look for a match in table2. If no match exist,
+the final output will include the row from table1 and a null value for table2.
+
+RIGHT OUTER JOIN: given table1 and table2, the RIGHT OUTER JOIN will take all rows in table2 and look for a match in table1. If no match exist,
+the final output will include the row from table2 and a null value for table1.
+
+2) Define primary key and foreign key. Give a real-world example for each.
+Primary key uniquely identify a record in the table.	Foreign key is a field in the table that is primary key in another table.
+
+table1
+id | name   | expertise_level
+1  | Fred   | 10
+2  | Loren  | 100
+3  | Max    | 1000
+
+table2
+expertise_level | seniority
+10              | junior
+100             | associate
+1000            | expert
+
+In the 2 tables above, id is the primary key.
+I can JOIN the two tables based on the expertise_level, which will be the foreign key in table2.
+
+3) Define aliasing.
+
+Aliasing is defined as using a different name (usually shorter, a single letter) to replace the table name in a query.
+
+4) Change this query so that you are using aliasing:
+
+SELECT professor.name , compensation.salary, compensation.vacation_days
+FROM professor
+JOIN compensation
+ON professor.id =
+compensation.professor_id;
+
+Using Alising:
+
+SELECT p.name , c.salary, compensation.vacation_days
+FROM professor AS p
+JOIN compensation AS c
+ON p.id = c.professor_id;
+
+5) Why would you use a NATURAL JOIN? Give a real-world example.
+I would use it to check whether some data (e.g. users, products) are present in 2 different tables and deduct some
+additional insight (e.g. if the list of products is in the list of orders of January, I can elicit those products
+should be dispatched by end of January)
+
+6) Using this Employee schema and data, write queries to find the following information:
+
+List all employees and all shifts.
+SELECT * FROM employees JOIN shifts ON employees.id = shifts.id;
+
+postgres=# SELECT * FROM employees JOIN shifts ON employees.id = shifts.id;
+ id |        name        | id |    date    | start_time | end_time
+----+--------------------+----+------------+------------+----------
+  1 | Hermione Granger   |  1 | 1998-03-09 | 08:00:00   | 12:00:00
+  2 | Ronald Weasley     |  2 | 1998-03-09 | 08:00:00   | 16:00:00
+  3 | Luna Lovegood      |  3 | 1998-03-09 | 12:00:00   | 16:00:00
+  4 | Draco Malfoy       |  4 | 1998-03-09 | 12:00:00   | 20:00:00
+  5 | Padma Patil        |  5 | 1998-03-09 | 16:00:00   | 20:00:00
+  6 | Neville Longbottom |  6 | 1998-03-10 | 08:00:00   | 12:00:00
+  7 | Cedric Diggory     |  7 | 1998-03-10 | 08:00:00   | 16:00:00
+  8 | Cho Chang          |  8 | 1998-03-10 | 12:00:00   | 16:00:00
+  9 | Dean Thomas        |  9 | 1998-03-10 | 12:00:00   | 20:00:00
+
+
+7) Using this Adoption schema and data, please write queries to retrieve the following information and include the results:
+
+Create a list of all volunteers. If the volunteer is fostering a dog, include each dog as well.
+
+postgres=# SELECT first_name, last_name, name FROM volunteers LEFT OUTER JOIN dogs ON volunteers.foster_dog_id = dogs.id;
+ first_name | last_name  |   name
+------------+------------+-----------
+ Rubeus     | Hagrid     | Munchkin
+ Marjorie   | Dursley    | Marmaduke
+ Sirius     | Black      |
+ Remus      | Lupin      |
+ Albus      | Dumbledore |
+
+
+The cat's name, adopter's name, and adopted date for each cat adopted within the past month to
+be displayed as part of the "Happy Tail" social media promotion which posts recent successful adoptions.
+
+postgres=#  SELECT name, date, first_name FROM cat_adoptions JOIN cats ON cat_adoptions.cat_id = cats.id
+JOIN adopters ON cat_adoptions.adopter_id = adopters.id WHERE cat_adoptions.date > CURRENT_DATE - INTERVAL '30 DAYS'
+
+   name   |    date    | first_name
+----------+------------+------------
+ Mushi    | 2019-07-09 | Arabella
+ Victoire | 2019-07-14 | Argus
+(2 rows)
+
+Create a list of adopters who have not yet chosen a dog to adopt.
+
+postgres=# SELECT first_name, last_name FROM volunteers WHERE available_to_foster = 't' AND foster_dog_id IS NULL;
+ first_name | last_name
+------------+-----------
+ Sirius     | Black
+ Remus      | Lupin
+
+Lists of all cats and all dogs who have not been adopted.
+
+postgres=#     SELECT cats.id, cats.name, cat_adoptions.adopter_id
+postgres-#     FROM cats
+postgres-#     LEFT OUTER JOIN cat_adoptions ON cats.id = cat_adoptions.cat_id
+postgres-#     WHERE cat_adoptions.adopter_id IS NULL;
+ id |   name   | adopter_id
+----+----------+------------
+  2 | Seashell |
+  5 | Nala     |
+(2 rows)
+
+
+postgres=#     SELECT dogs.id, dogs.name, dog_adoptions.adopter_id
+postgres-#     FROM dogs
+postgres-#     LEFT OUTER JOIN dog_adoptions ON dogs.id = dog_adoptions.dog_id
+postgres-#     WHERE dog_adoptions.adopter_id IS NULL;
+  id   |   name    | adopter_id
+-------+-----------+------------
+ 10002 | Munchkin  |
+ 10001 | Boujee    |
+ 10003 | Lassie    |
+ 10004 | Marley    |
+ 10006 | Marmaduke |
+(5 rows)
+
+The name of the person who adopted Rosco.
+
+postgres=# SELECT dogs.name, first_name FROM dogs JOIN dog_adoptions ON dogs.id = dog_adoptions.dog_id JOIN adopters ON adopters.id = dog_adoptions.adopter_id;
+ name  | first_name
+-------+------------
+ Rosco | Argus
+(1 row)
+
+
+8) Using this Library schema and data, write queries applying the following scenarios and include the results:
+
+To determine if the library should buy more copies of a given book, please provide the names and position,
+in order, of all of the patrons with a hold (request for a book with all copies checked out) on "Advanced Potion-Making".
+
+postgres=# SELECT patrons.name, holds.rank FROM holds
+postgres-# JOIN patrons ON holds.patron_id = patrons.id
+postgres-# JOIN books ON holds.isbn = books.isbn
+postgres-# WHERE books.title = 'Advanced Potion-Making';
+
+      name      | rank
+----------------+------
+ Cedric Diggory |    2
+ Terry Boot     |    1
+(2 rows)
+
+List all of the library patrons. If they have one or more books checked out,
+list the books with the patrons.
+
+***I am assuming that a book is checked out out when it has not been yet returned 8check_in_date > CURRENT DATE or null)
+
+postgres=# SELECT name, books.isbn, title, checked_out_date, checked_in_date FROM patrons
+postgres-# RIGHT OUTER JOIN transactions ON patrons.id = transactions.patron_id
+postgres-# JOIN books ON transactions.isbn = books.isbn
+postgres-# WHERE checked_in_date IS NULL AND checked_out_date < CURRENT_DATE;
+      name      |    isbn    |                  title                  | checked_out_date | checked_in_date
+----------------+------------+-----------------------------------------+------------------+-----------------
+ Terry Boot     | 9136884926 | Advanced Potion-Making                  | 2019-07-26       |
+ Cedric Diggory | 3458400871 | Fantastic Beasts and Where to Find Them | 2019-07-28       |
