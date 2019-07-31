@@ -2,16 +2,63 @@
 
 I can run a query using JOIN to merge the 2 data tables based on a common id.
 
-1.1) Explain, in your own words, the difference between an INNER JOIN,
+2) Explain, in your own words, the difference between an INNER JOIN,
 LEFT OUTER JOIN, and RIGHT OUTER JOIN. Give a real-world example for each.
 
 LEFT OUTER JOIN:  given table1 and table2, the LEFT OUTER JOIN will take all rows in table1 and look for a match in table2. If no match exist,
 the final output will include the row from table1 and a null value for table2.
 
+table 1
+A
+B
+C
+D
+
+table 2
+A
+C
+D
+
+LEFT OUTER JOIN RESULT
+A A
+B NULL
+C C
+D D
+
 RIGHT OUTER JOIN: given table1 and table2, the RIGHT OUTER JOIN will take all rows in table2 and look for a match in table1. If no match exist,
 the final output will include the row from table2 and a null value for table1.
 
-2) Define primary key and foreign key. Give a real-world example for each.
+table 1
+A
+B
+C
+D
+
+table 2
+A
+E
+
+RIGHT OUTER JOIN RESULT
+A A
+NULL E
+
+INNER JOIN: given tabel 1 and table2, the output of an INNER JOIN will be a list with only those records that are present in both tables
+and matching.
+
+table 1
+A
+B
+C
+
+table 2
+A
+F
+D
+
+table 2
+A
+
+3) Define primary key and foreign key. Give a real-world example for each.
 Primary key uniquely identify a record in the table.	Foreign key is a field in the table that is primary key in another table.
 
 table1
@@ -29,11 +76,11 @@ expertise_level | seniority
 In the 2 tables above, id is the primary key.
 I can JOIN the two tables based on the expertise_level, which will be the foreign key in table2.
 
-3) Define aliasing.
+4) Define aliasing.
 
 Aliasing is defined as using a different name (usually shorter, a single letter) to replace the table name in a query.
 
-4) Change this query so that you are using aliasing:
+5) Change this query so that you are using aliasing:
 
 SELECT professor.name , compensation.salary, compensation.vacation_days
 FROM professor
@@ -48,17 +95,20 @@ FROM professor AS p
 JOIN compensation AS c
 ON p.id = c.professor_id;
 
-5) Why would you use a NATURAL JOIN? Give a real-world example.
-I would use it to check whether some data (e.g. users, products) are present in 2 different tables and deduct some
-additional insight (e.g. if the list of products is in the list of orders of January, I can elicit those products
-should be dispatched by end of January)
+6) Why would you use a NATURAL JOIN? Give a real-world example.
+ NATURAL JOIN is a JOIN operation that creates an implicit join clause for
+you based on the common columns in the two tables being joined. Common columns are columns
+that have the same name in both tables.
+For example, I would use it to check whether some data (e.g. users, products) are present
+in 2 different tables and deduct some additional insight (e.g. if the list of products is in
+the list of orders of January, I can elicit those products should be dispatched by end of January).
 
-6) Using this Employee schema and data, write queries to find the following information:
+7) Using this Employee schema and data, write queries to find the following information:
 
 List all employees and all shifts.
-SELECT * FROM employees JOIN shifts ON employees.id = shifts.id;
+SELECT * FROM employees FULL OUTER JOIN shifts on employees.id = shifts.id;
 
-postgres=# SELECT * FROM employees JOIN shifts ON employees.id = shifts.id;
+postgres=# SELECT * FROM employees FULL OUTER JOIN shifts on employees.id = shifts.id;
  id |        name        | id |    date    | start_time | end_time
 ----+--------------------+----+------------+------------+----------
   1 | Hermione Granger   |  1 | 1998-03-09 | 08:00:00   | 12:00:00
@@ -70,10 +120,24 @@ postgres=# SELECT * FROM employees JOIN shifts ON employees.id = shifts.id;
   7 | Cedric Diggory     |  7 | 1998-03-10 | 08:00:00   | 16:00:00
   8 | Cho Chang          |  8 | 1998-03-10 | 12:00:00   | 16:00:00
   9 | Dean Thomas        |  9 | 1998-03-10 | 12:00:00   | 20:00:00
+    |                    | 10 | 1998-03-10 | 16:00:00   | 20:00:00
+    |                    | 11 | 1998-03-11 | 08:00:00   | 12:00:00
+    |                    | 12 | 1998-03-11 | 08:00:00   | 16:00:00
+    |                    | 13 | 1998-03-11 | 12:00:00   | 16:00:00
+    |                    | 14 | 1998-03-11 | 12:00:00   | 20:00:00
+    |                    | 15 | 1998-03-11 | 16:00:00   | 20:00:00
+    |                    | 16 | 1998-03-12 | 08:00:00   | 12:00:00
+    |                    | 17 | 1998-03-12 | 08:00:00   | 16:00:00
+    |                    | 18 | 1998-03-12 | 12:00:00   | 16:00:00
+    |                    | 19 | 1998-03-12 | 12:00:00   | 20:00:00
+    |                    | 20 | 1998-03-12 | 16:00:00   | 20:00:00
+    |                    | 21 | 1998-03-13 | 08:00:00   | 12:00:00
+    |                    | 22 | 1998-03-13 | 08:00:00   | 16:00:00
+    |                    | 23 | 1998-03-13 | 12:00:00   | 16:00:00
+    |                    | 24 | 1998-03-13 | 12:00:00   | 20:00:00
+    |                    | 25 | 1998-03-13 | 16:00:00   | 20:00:00
 
-
-7) Using this Adoption schema and data, please write queries to retrieve the following information and include the results:
-
+8) Using this Adoption schema and data, please write queries to retrieve the following information and include the results:
 Create a list of all volunteers. If the volunteer is fostering a dog, include each dog as well.
 
 postgres=# SELECT first_name, last_name, name FROM volunteers LEFT OUTER JOIN dogs ON volunteers.foster_dog_id = dogs.id;
@@ -100,11 +164,11 @@ JOIN adopters ON cat_adoptions.adopter_id = adopters.id WHERE cat_adoptions.date
 
 Create a list of adopters who have not yet chosen a dog to adopt.
 
-postgres=# SELECT first_name, last_name FROM volunteers WHERE available_to_foster = 't' AND foster_dog_id IS NULL;
- first_name | last_name
-------------+-----------
- Sirius     | Black
- Remus      | Lupin
+postgres=# SELECT * FROM dog_adoptions JOIN adopters ON adopters.id != dog_adoptions.adopter_id;
+ adopter_id | dog_id |    date    |   fee   | id | first_name | last_name |       address       | phone_number
+------------+--------+------------+---------+----+------------+-----------+---------------------+--------------
+          3 |  10007 | 2017-08-27 | 80.0000 |  1 | Hermione   | Granger   | 32 Granger's Street | 676-464-7837
+          3 |  10007 | 2017-08-27 | 80.0000 |  2 | Arabella   | Figg      | 4 Wisteria Walk     | 843-228-5239
 
 Lists of all cats and all dogs who have not been adopted.
 
@@ -118,11 +182,11 @@ postgres-#     WHERE cat_adoptions.adopter_id IS NULL;
   5 | Nala     |
 (2 rows)
 
+SELECT dogs.id, dogs.name, dog_adoptions.adopter_id
+FROM dogs
+LEFT OUTER JOIN dog_adoptions ON dogs.id = dog_adoptions.dog_id
+WHERE dog_adoptions.adopter_id IS NULL;
 
-postgres=#     SELECT dogs.id, dogs.name, dog_adoptions.adopter_id
-postgres-#     FROM dogs
-postgres-#     LEFT OUTER JOIN dog_adoptions ON dogs.id = dog_adoptions.dog_id
-postgres-#     WHERE dog_adoptions.adopter_id IS NULL;
   id   |   name    | adopter_id
 -------+-----------+------------
  10002 | Munchkin  |
@@ -134,14 +198,17 @@ postgres-#     WHERE dog_adoptions.adopter_id IS NULL;
 
 The name of the person who adopted Rosco.
 
-postgres=# SELECT dogs.name, first_name FROM dogs JOIN dog_adoptions ON dogs.id = dog_adoptions.dog_id JOIN adopters ON adopters.id = dog_adoptions.adopter_id;
+postgres=# SELECT dogs.name, first_name FROM dogs
+JOIN dog_adoptions ON dogs.id = dog_adoptions.dog_id
+JOIN adopters ON adopters.id = dog_adoptions.adopter_id
+WHERE dogs.name = 'Rosco';
  name  | first_name
 -------+------------
  Rosco | Argus
 (1 row)
 
 
-8) Using this Library schema and data, write queries applying the following scenarios and include the results:
+9) Using this Library schema and data, write queries applying the following scenarios and include the results:
 
 To determine if the library should buy more copies of a given book, please provide the names and position,
 in order, of all of the patrons with a hold (request for a book with all copies checked out) on "Advanced Potion-Making".
@@ -160,13 +227,15 @@ postgres-# WHERE books.title = 'Advanced Potion-Making';
 List all of the library patrons. If they have one or more books checked out,
 list the books with the patrons.
 
-***I am assuming that a book is checked out out when it has not been yet returned 8check_in_date > CURRENT DATE or null)
-
 postgres=# SELECT name, books.isbn, title, checked_out_date, checked_in_date FROM patrons
 postgres-# RIGHT OUTER JOIN transactions ON patrons.id = transactions.patron_id
-postgres-# JOIN books ON transactions.isbn = books.isbn
-postgres-# WHERE checked_in_date IS NULL AND checked_out_date < CURRENT_DATE;
-      name      |    isbn    |                  title                  | checked_out_date | checked_in_date
-----------------+------------+-----------------------------------------+------------------+-----------------
- Terry Boot     | 9136884926 | Advanced Potion-Making                  | 2019-07-26       |
- Cedric Diggory | 3458400871 | Fantastic Beasts and Where to Find Them | 2019-07-28       |
+postgres-# JOIN books ON transactions.isbn = books.isbn;
+       name       |    isbn    |                  title                  | checked_out_date | checked_in_date
+------------------+------------+-----------------------------------------+------------------+-----------------
+ Hermione Granger | 1840918626 | Hogwarts: A History                     | 2013-07-28       | 2013-07-29
+ Cho Chang        | 9136884926 | Advanced Potion-Making                  | 2013-07-28       | 2013-07-29
+ Terry Boot       | 3458400871 | Fantastic Beasts and Where to Find Them | 2013-07-28       | 2013-07-29
+ Padma Patil      | 3458400871 | Fantastic Beasts and Where to Find Them | 2019-07-22       | 2019-07-25
+ Terry Boot       | 9136884926 | Advanced Potion-Making                  | 2019-07-26       |
+ Hermione Granger | 3458400871 | Fantastic Beasts and Where to Find Them | 2019-07-26       | 2019-07-28
+ Cedric Diggory   | 3458400871 | Fantastic Beasts and Where to Find Them | 2019-07-28       |
